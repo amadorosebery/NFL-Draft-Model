@@ -1,0 +1,91 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import scipy 
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+filename2017 = '~/Desktop/CFB2017-2.xlsx' #assigns our spreadsheet data to filename2017
+QB2017 = pd.read_excel(filename2017,sheet_name = 'Sheet1') #reads the data into python with pd.readexcel
+
+sortbypassingyards = QB2017.sort_values(['Yds']) #sorts the passing yards column from least to most
+print(sortbypassingyards['Yds'])
+
+avgpassingyards = QB2017['Yds'].mean()
+print(avgpassingyards)
+
+TdIntRatio=QB2017['TD']/QB2017['Int'] #Calculates TD/INT ratio
+
+Rank = QB2017['Rank']
+PassYards = QB2017['Yds']
+plt.scatter(((len(Rank)+1)-Rank),PassYards)
+
+def corrvisualizer(a,b):
+    plt.scatter(a,b)
+corrvisualizer(QB2017['Rate'],QB2017['Pct'])
+
+def corrvisualizer2(a,b):
+    a = str(a)
+    b = str(b)
+    plt.scatter(QB2017[a],QB2017[b])
+    reg = np.polyfit(QB2017[a],QB2017[b],deg=1)
+    plt.plot(QB2017[a],(reg[0]*QB2017[b])+reg[1])
+    plt.xlabel("")
+    
+corrvisualizer2('Rate','Yds')  
+    
+corrvisualizer(QB2017['Rate'],QB2017['Yds']) #plots a scatterplot for 2 columns
+reg = np.polyfit(QB2017['Rate'],QB2017['Yds'],deg=1)
+plt.plot(QB2017['Rate'],(reg[0]*QB2017['Rate'])+reg[1])
+
+np.corrcoef(QB2017['Rate'],QB2017['Pct']) #calculates the corrlation coefficient for 2 columns
+    
+plt.hist(QB2017['TD'],bins=10) #Creates a histogram for one column
+
+
+#Let's build a model skill score = corrcoef*((x-xbar)/standarddev)
+#corrcoeff based on x column versus Passer Rating
+#For this model lets use TdIntRatio,PassingYards,Tds,CompletionPct,Yards/att,RushYards
+
+#This block of code calculates the Completion Pct model value
+PctStd = np.std(QB2017['Pct'])
+PctMean = np.mean(QB2017['Pct'])
+PctCorrCoef = np.corrcoef(QB2017['Rate'],QB2017['Pct'])
+PctAboveBelowMean = QB2017['Pct'] - PctMean
+PctStdAboveBelow = PctAboveBelowMean/PctStd
+print(PctStdAboveBelow)
+PctModelValue = PctCorrCoef[0,1]*PctStdAboveBelow
+print(PctModelValue)
+
+YPAStd = np.std(QB2017['Y/A'])
+print(YPAStd)
+YPAMean = np.mean(QB2017['Y/A'])
+print(YPAMean)
+YPACorrCoef = np.corrcoef(QB2017['Rate'],QB2017['Y/A'])
+YPAAboveBelowMean = QB2017['Y/A'] - YPAMean
+print(YPAAboveBelowMean )
+YPAStdAboveBelow = YPAAboveBelowMean/YPAStd
+print(YPAStdAboveBelow)
+YPAModelValue = PctCorrCoef[0,1]*YPAStdAboveBelow
+print(YPAModelValue)
+
+l=np.std(QB2017['rYds'])
+print(l)
+
+Rank = QB2017['Rk']
+DraftedQBs = []
+a=1
+for i in range(len(Rank)):
+    draft = QB2017.loc[a,'DraftStatus']
+    if draft == 'Yes':
+        DraftedQBs.append(QB2017.loc[a,:])
+    a += 1
+print(DraftedQBs)
+    
+    
+f = QB2017.loc[1:3,'DraftStatus']
+print(QB2017)
+
