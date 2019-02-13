@@ -7,8 +7,7 @@ import math
 import statistics
 from scipy.stats import norm
 
-
-collegefile = "~\Desktop\DataScience\NFL-Draft-Model\cfl_players.xlsx" #assigns our spreadsheet data to filename2017
+collegefile = ".\cfl_players.xlsx" #assigns our spreadsheet data to filename2017
 cfbQb = pd.read_excel(collegefile,sheet_name = 'CFB') #reads the data into python with pd.readexcel
 cfbDQb = pd.read_excel(collegefile, sheet_name = 'CFBD') #reads drafted stats into python
 
@@ -50,10 +49,11 @@ stdevPR = np.std(PR) #Sample-std deviation of College Passer Rating for college 
 
 stdevPRD = np.std(PRD) #Sample-std deviation of College Passer Rating for Drafted QBs
 
-normColl=plt.plot(norm.pdf(PR,avgPr,stdevPR)) #Normal plot of college passer rating for all college QBs
+#normColl=plt.plot(norm.pdf(PR,avgPr,stdevPR)) #Normal plot of college passer rating for all college QBs
 
 normDraft=plt.plot(norm.pdf(PRD, avgPrD, stdevPRD)) #Normal plot of college Passer Rating for drafted QBs
 
+#plt.show()
 
 
 
