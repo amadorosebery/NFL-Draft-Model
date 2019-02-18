@@ -7,6 +7,8 @@ import math
 import statistics
 import stats
 from scipy.stats import norm
+import seaborn as sns
+fig, ax = plt.subplots(1,1)
 
 collegefile = ".\cfl_players.xlsx" #assigns our spreadsheet data to filename2017
 cfbQb = pd.read_excel(collegefile,sheet_name = 'CFB') #reads the data into python with pd.readexcel
@@ -38,9 +40,9 @@ cAYPA = cfbQb['AY/A'] #College Average Yards per Attempt
 #Passer Rating
 PR = ((8.4*cfbQb['Yds'])+(330+ cfbQb['TD'])+(100*cfbQb['Cmp'])-(200 * cfbQb['Int']))/ cfbQb['Att'] #College Passer Rating for All College QBs
 
-PR = pd.dataframe(PR)
+#PR = pd.dataframe(PR)
 
-PR = PR.sort()
+#PR = PR.sort()
 
 PRD = ((8.4*cfbDQb['Yds'])+(330+ cfbDQb['TD'])+(100*cfbDQb['Cmp'])-(200 * cfbDQb['Int']))/ cfbDQb['Att'] #College Passer Rating for Drafted Qbs
 
@@ -56,22 +58,38 @@ stdevPR = np.std(PR) #Sample-std deviation of College Passer Rating for college 
 
 stdevPRD = np.std(PRD) #Sample-std deviation of College Passer Rating for Drafted QBs
 
-#normColl=norm.pdf(PR,meanPr,stdevPR) #Normal plot of college passer rating for all college QBs
+normColl=norm.pdf(PR,meanPr,stdevPR) #Normal plot of college passer rating for all college QBs
 
 #normDraft=plt.plot(norm.pdf(PRD, avgPrD, stdevPRD)) #Normal plot of college Passer Rating for drafted QBs
 
 fit = norm.pdf(PR, meanPr, stdevPR)  #this is a fitting indeed
 
-plt.plot(PR, fit, '-o')
+fitd = norm.pdf(PRD, avgPrD, stdevPRD)
 
-#plt.hist(PR, density=True) #use this to draw histogram of your data
+v1 = pd.Series(fit, name ='PR')
+v2 = pd.Series(fitd, name = 'PR-Drafted')
+#plt.plot(PR, fit, '-o')
 
-                            #use may also need add this 
+#Histogram with line for College Passer Rating
 
-                            #histColl=plt.hist(PR)
-                    
-#plt.show()
+line_up=ax.hist(PR, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College') #Histogram
 
+sns.kdeplot(PR) #Distribution line estimate
+
+#Histogram with estimated Distribution Line for Drafted College Passer Rating
+
+line_down=ax.hist(PRD, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College') #Histogram
+
+sns.kdeplot(PRD) #Distribution line estimate
+
+plt.legend()                 
+'''
+#Plots stacked Passer Ratings
+#plt.figure()
+plt.hist([PR,PRD], histtype = 'barstacked' , density=True);
+v3 = np.concatenate((PR, PRD))
+sns.kdeplot(v3);
+'''
 
 
 
