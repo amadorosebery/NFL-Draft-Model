@@ -37,6 +37,9 @@ cAYPA = cfbQb['AY/A'] #College Average Yards per Attempt
 
 '''((8.4 x Passing Yards) + (330 + Touchdown Passes) + (100 x Number of Completions) – (200 x Interceptions)) / Passing Attempts
 '''
+
+#######################################################
+
 #Passer Rating
 PR = ((8.4*cfbQb['Yds'])+(330+ cfbQb['TD'])+(100*cfbQb['Cmp'])-(200 * cfbQb['Int']))/ cfbQb['Att'] #College Passer Rating for All College QBs
 
@@ -71,7 +74,7 @@ v2 = pd.Series(fitd, name = 'PR-Drafted')
 #plt.plot(PR, fit, '-o')
 
 #Histogram with line for College Passer Rating
-
+'''
 line_up=ax.hist(PR, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College') #Histogram
 
 sns.kdeplot(PR) #Distribution line estimate
@@ -82,7 +85,9 @@ line_down=ax.hist(PRD, density=True, histtype='stepfilled', alpha=0.2, label = '
 
 sns.kdeplot(PRD) #Distribution line estimate
 
-plt.legend()                 
+plt.legend()
+'''
+########                 
 '''
 #Plots stacked Passer Ratings
 #plt.figure()
@@ -91,8 +96,141 @@ v3 = np.concatenate((PR, PRD))
 sns.kdeplot(v3);
 '''
 
+###################################################################
+#Yds comparision
+#Total college Qb Yds 
 
+cYds = cfbQb['Yds']
 
+meancYds=np.mean(cYds)
 
+stdevcYds = np.std(cYds)
 
+#Drafted Qb yards
 
+dYds = cfbDQb['Yds']
+
+#Plots
+'''
+hist_dYds=ax.hist(dYds, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College Yds') #Histogram
+
+sns.kdeplot(dYds)
+
+hist_cYds=ax.hist(cYds, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College Yds') #Histogram
+
+sns.kdeplot(cYds)
+'''
+##########STACKED
+'''
+plt.hist([cYds,dYds], histtype = 'barstacked' , density=True);
+vYds = np.concatenate((cYds, dYds))
+sns.kdeplot(vYds)
+'''
+###################################################################################
+#Y/A Comparison
+
+#College Total
+
+cYPA
+
+#College Drafted
+
+dYPA = cfbDQb['Y/A']
+
+#Plots
+
+'''
+hist_cYds=ax.hist(cYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College Y/A') #Histogram
+
+sns.kdeplot(cYPA)
+
+hist_dYds=ax.hist(dYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College Y/A') #Histogram
+
+sns.kdeplot(dYPA)
+
+plt.legend()
+'''
+###############################################################################
+#Completion percentage comparision
+
+#College Total
+cPCT
+
+#College Drafted
+dPCT = cfbDQb['Pct']
+
+#Plots
+'''
+hist_cYds=ax.hist(cPCT, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College Pct') #Histogram
+
+sns.kdeplot(cPCT)
+
+hist_dYds=ax.hist(dPCT, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College Pct') #Histogram
+
+sns.kdeplot(dPCT)
+
+plt.legend()
+'''
+###########################################################################################
+#Touchdowns Per Attempt Comparison
+
+#College Total
+cTDPA
+
+#College Drafted
+dTDPA = cfbDQb['TD']/cfbDQb['Att']
+
+#Plots
+
+'''
+hist_cYds=ax.hist(cTDPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College TD/Att') #Histogram
+
+sns.kdeplot(cTDPA)
+
+hist_dYds=ax.hist(dTDPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College TD/Att') #Histogram
+
+sns.kdeplot(dTDPA)
+
+plt.legend()
+'''
+#######################################################################################################
+#Touchdowns Per Game Comparison
+
+#College Total
+cTDpergame
+
+#College Drafted
+dTDpergame = cfbDQb['TD']/cfbDQb['G']
+
+#Plots
+'''
+hist_cYds=ax.hist(cTDpergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College TD/G') #Histogram
+
+sns.kdeplot(cTDpergame)
+
+hist_dYds=ax.hist(dTDpergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College TD/G') #Histogram
+
+sns.kdeplot(dTDpergame)
+
+plt.legend()
+'''
+###############################################################################################################################
+
+#Total Yard per Game Comparison
+
+#College Total
+cTtlYdspergame
+
+#College Drafted
+dTtlYdspergame = (cfbDQb['Yds']+cfbDQb['RYds'])/cfbDQb['G']
+
+#Plots
+hist_cYds=ax.hist(cTtlYdspergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College Yds/G') #Histogram
+
+sns.kdeplot(cTtlYdspergame)
+
+hist_dYds=ax.hist(dTtlYdspergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College Yds/G') #Histogram
+
+sns.kdeplot(dTtlYdspergame)
+
+plt.legend()
