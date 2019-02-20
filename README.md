@@ -20,15 +20,33 @@ The NFL draft is a annual event where professional football teams take turns sel
 
 ### Methodology - Data Wrangling
 ------------
+We manually obtained all of our data from pro-football-reference.com. Each line of data contains a players’ college stats (and NFL stats if the QB played in both college and NFL).
 
+We started with a .csv file containing all Division 1 FBS college football QBs who played between 2000 and 2017 (~2000). This list was then narrowed to 877 unique college QBs playing between 2000 and 2017 in D1. We then cross-referenced this data with all college QBs who were drafted into the NFL between 2000 and 2017, and created a subset list of these players.
 
 ### Methodology - Analysis
 ![TDYPA](https://github.com/amadorosebery/NFL-Draft-Model/edit/master/TDYPA.png)
-      
+In order to build a model to predict which QB will perform best at the NFL level, we first wanted to determine which statistics were the best predictors of successful NFL QBs. We did this by creating several scatter plots comparing college stats to their NFL equivalent stats. For example, we created a scatter plot comparing college completion percentage to NFL completion percentage. Completion percentage is a useful measure of QB skill and thus we wanted to see if a high college completion percentage was correlated with a high NFL completion percentage. We then found the correlation coefficient for the plot and we were able to compare the correlation coefficients of all the plots to figure out which stats were the most important for predicting NFL success. We also made a correlation heat map to further help visualize which college and nfl stats had a high correlation. Box plots were also made comparing the success of NFL quarterbacks based on which conference they belonged to in college. 
+
+For the second part of the project, we wanted to create a model which is able to determine which college players should be drafted and which ones should not be drafted based on their college stats. In order to accomplish this we were able to use a python library called SciKit Learn. We used a dataset including all college quarterbacks since 2000, their stats, and a column to specify whether they were drafted or not. We then used a classification model in the library to take in this dataset and return to us the statistics that it believed to be most important in determining whether or not a player gets drafted. The importance of the statistics is displayed in weights summing to one. We were then able to test the model by plugging in a dataset of 2017 college quarterbacks and their stats. The model returns a 1 if it believes the player should be drafted and a 0 if the player shouldn’t be drafted. We then compared our results with the actual 2017 nfl draft class to see how accurate the model was and how it can be improved. 
 
 ### Summary
 
 ### Key Results
 
+Data Visualization: 
+Histograms (Refer to https://github.com/amadorosebery/NFL-Draft-Model/edit/master/TDYPA.png): In all graphs generated, all college QBs (blue) were compared to the subset of college QBs who actually were drafted into the NFL (green line). 
+
+Scatterplots (Refer to Plots.pdf): Based on the scatter plots and the calculated correlation coefficients, we were able to determine that the most important stats for predicting whether a college football player would make a good NFL football player were completion percentage, yards per attempt, the inverse of interceptions per attempt, touchdown to interception ratio, and adjusted yards per attempt. The plot for draft age versus NFL passer rating also showed us that there is more uncertainty in the success of quarterbacks drafted at age 21 and quarterbacks drafted at age 23 were more consistent. 
+
+Classification Model:
+We used a decision tree classification model to determine whether a college player will or will not be drafted. Using a python modeling function called SciKit Learn, combined with the dataset containing all QBs who played in college football, we determined weights for each of the 8 factors (columns). These weights essentially determined how relevant each metric was. Using these values, we used SciKit Learn to see whether players (from each year) would or would not be drafted into the NFL according to our model. We then compared this to whether the player was/was not drafted in actuality in that year. The most important factor based on this model was the stat: TouchdownsxYards/Attempts. 
+
+
 ### Future Work
+Adjust training-testing ratio to 80-20.
+
+Delve into more accurate/complex models over the SciKit Learn Classification Decision Tree model, to make better predictions (improve accuracy).
+
+Determine how to better determine the accuracy of our model against the actual players drafted in a given year.
 
