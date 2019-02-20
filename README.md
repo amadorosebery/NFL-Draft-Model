@@ -7,7 +7,7 @@ A program that predicts which college football players should have the most succ
 ### Contributors
 -----------
 -  Amado Rosebery
--  J Kinderman
+-  Joe Kinderman
 -  Conor Levenson
 -  Mihir Arya
 -  Austin Miles
