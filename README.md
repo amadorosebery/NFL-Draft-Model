@@ -21,6 +21,8 @@ The NFL draft is a annual event where professional football teams take turns sel
 ### Methodology - Data Wrangling
 
 ### Methodology - Analysis
+![Touchdowns times Yards divided by Attempts Comparison](https://github.com/amadorosebery/NFL-Draft-Model/edit/master/Touchdowns times Yards divided by Attempts Comparison.png)
+      
 
 ### Summary
 
