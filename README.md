@@ -25,12 +25,17 @@ We manually obtained all of our data from pro-football-reference.com. Each line 
 We started with a .csv file containing all Division 1 FBS college football QBs who played between 2000 and 2017 (~2000). This list was then narrowed to 877 unique college QBs playing between 2000 and 2017 in D1. We then cross-referenced this data with all college QBs who were drafted into the NFL between 2000 and 2017, and created a subset list of these players.
 
 ### Methodology - Analysis
-![TDYPA](https://github.com/amadorosebery/NFL-Draft-Model/edit/master/TDYPA.png)
 In order to build a model to predict which QB will perform best at the NFL level, we first wanted to determine which statistics were the best predictors of successful NFL QBs. We did this by creating several scatter plots comparing college stats to their NFL equivalent stats. For example, we created a scatter plot comparing college completion percentage to NFL completion percentage. Completion percentage is a useful measure of QB skill and thus we wanted to see if a high college completion percentage was correlated with a high NFL completion percentage. We then found the correlation coefficient for the plot and we were able to compare the correlation coefficients of all the plots to figure out which stats were the most important for predicting NFL success. We also made a correlation heat map to further help visualize which college and nfl stats had a high correlation. Box plots were also made comparing the success of NFL quarterbacks based on which conference they belonged to in college. 
 
 For the second part of the project, we wanted to create a model which is able to determine which college players should be drafted and which ones should not be drafted based on their college stats. In order to accomplish this we were able to use a python library called SciKit Learn. We used a dataset including all college quarterbacks since 2000, their stats, and a column to specify whether they were drafted or not. We then used a classification model in the library to take in this dataset and return to us the statistics that it believed to be most important in determining whether or not a player gets drafted. The importance of the statistics is displayed in weights summing to one. We were then able to test the model by plugging in a dataset of 2017 college quarterbacks and their stats. The model returns a 1 if it believes the player should be drafted and a 0 if the player shouldn’t be drafted. We then compared our results with the actual 2017 nfl draft class to see how accurate the model was and how it can be improved. 
 
 ### Summary
+Classification: We are still working on determining the best way to measure the accuracy of our model.
+
+Weights: Based on the generated weight values using the SciKit Learn model, the three most relevant factors in predicting whether or not a player would be drafted were: total passing yards, touchdowns per game, interceptions per game.
+
+Histograms: the approximate average of drafted college stats is greater than the approximate average of stats for all college players (as expected). Also validated the weightage of each of the 8 factors.
+
 
 ### Key Results
 
