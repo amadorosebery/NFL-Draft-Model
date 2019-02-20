@@ -225,6 +225,7 @@ cTtlYdspergame
 dTtlYdspergame = (cfbDQb['Yds']+cfbDQb['RYds'])/cfbDQb['G']
 
 #Plots
+'''
 hist_cYds=ax.hist(cTtlYdspergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College Yds/G') #Histogram
 
 sns.kdeplot(cTtlYdspergame)
@@ -234,3 +235,26 @@ hist_dYds=ax.hist(dTtlYdspergame, density=True, histtype='stepfilled', alpha=0.2
 sns.kdeplot(dTtlYdspergame)
 
 plt.legend()
+'''
+
+###############################################################################################################
+
+#Touchdown times Yds/ Attempts Comparision
+
+#College Total
+cTDYPA = (cfbQb['TD']*cfbQb['Yds'])/cfbQb['Att']
+
+#College Drafted
+dTDYPA = (cfbDQb['TD']*cfbDQb['Yds'])/cfbDQb['Att']
+
+#Plots
+hist_cTDYPA=ax.hist(cTDYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Total TD*Yds/Att') #Histogram
+
+sns.kdeplot(cTDYPA)
+
+hist_dTDYPA=ax.hist(dTDYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College TD*Yds/Att') #Histogram
+
+sns.kdeplot(dTDYPA)
+
+plt.legend()
+
