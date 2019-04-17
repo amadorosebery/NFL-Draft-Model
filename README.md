@@ -49,5 +49,5 @@ We used a decision tree, random forest, k nearest neighbor, and gradient boosted
 
 
 ### Future Work
-Include additional features such as weight and height of the quarterbacks.
+Include additional metrics such as weight and height of the quarterbacks.
 
