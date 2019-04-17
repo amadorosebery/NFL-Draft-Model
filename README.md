@@ -45,13 +45,9 @@ Histograms (Refer to https://github.com/amadorosebery/NFL-Draft-Model/edit/maste
 Scatterplots (Refer to Plots.pdf): Based on the scatter plots and the calculated correlation coefficients, we were able to determine that the most important stats for predicting whether a college football player would make a good NFL football player were completion percentage, yards per attempt, the inverse of interceptions per attempt, touchdown to interception ratio, and adjusted yards per attempt. The plot for draft age versus NFL passer rating also showed us that there is more uncertainty in the success of quarterbacks drafted at age 21 and quarterbacks drafted at age 23 were more consistent. 
 
 Classification Model:
-We used a decision tree classification model to determine whether a college player will or will not be drafted. Using a python modeling function called SciKit Learn, combined with the dataset containing all QBs who played in college football, we determined weights for each of the 8 factors (columns). These weights essentially determined how relevant each metric was. Using these values, we used SciKit Learn to see whether players (from each year) would or would not be drafted into the NFL according to our model. We then compared this to whether the player was/was not drafted in actuality in that year. The most important factor based on this model was the stat: TouchdownsxYards/Attempts. 
+We used a decision tree, random forest, k nearest neighbor, and gradient boosted random forest classifiers to determine whether a college player will or will not be drafted. Using the python modeling library called SciKit Learn and XGboost, combined with the dataset containing all QBs who played in college football, we determined weights for each of the 8 factors (columns). These weights essentially determined how relevant each metric was. Using these values, we used SciKit Learn and XGboost to see whether players (from each year) would or would not be drafted into the NFL according to our model. We then compared this to whether the player was/was not drafted in actuality in that year. The most important factor based on this model was the stat: Yards. 
 
 
 ### Future Work
-Adjust training-testing ratio to 80-20.
-
-Delve into more accurate/complex models over the SciKit Learn Classification Decision Tree model, to make better predictions (improve accuracy).
-
-Determine how to better determine the accuracy of our model against the actual players drafted in a given year.
+Include additional features such as weight and height of the quarterbacks.
 
