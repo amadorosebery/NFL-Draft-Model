@@ -1,18 +1,20 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
 import scipy
 import xlrd
 import math
 import statistics
-import stats
+#import stats
 from scipy.stats import norm
 import seaborn as sns
-fig, ax = plt.subplots(1,1)
 
-collegefile = ".\cfl_players.xlsx" #assigns our spreadsheet data to filename2017
-cfbQb = pd.read_excel(collegefile,sheet_name = 'CFB') #reads the data into python with pd.readexcel
-cfbDQb = pd.read_excel(collegefile, sheet_name = 'CFBD') #reads drafted stats into python
+#fig, ax = plt.subplots(1,1)
+
+collegefile = ".\CFB_Stats_New_04022019.xlsx" #assigns our spreadsheet data to filename2017
+cfbQb = pd.read_excel(collegefile,sheet_name = 'CFBND') #reads the data into python with pd.readexcel
+cfbDQb = pd.read_excel(collegefile, sheet_name = 'CFBD1') #reads drafted stats into python
 
 columnNames = list(cfbQb.head(0))
 
@@ -27,9 +29,9 @@ cTDPA = cfbQb['TD']/cfbQb['Att']        #Touchdowns per attempt
 
 cTDpergame = cfbQb['TD']/cfbQb['G']     #Touchdowns per game
 
-cRushYdspergame = cfbQb['RYds']/cfbQb['G'] #rush yards per game
+#cRushYdspergame = cfbQb['RYds']/cfbQb['G'] #rush yards per game
 
-cTtlYdspergame = (cfbQb['Yds']+cfbQb['RYds'])/cfbQb['G'] #total yards per game
+#cTtlYdspergame = (cfbQb['Yds']+cfbQb['RYds'])/cfbQb['G'] #total yards per game
 
 cINTPA = 1/(cfbQb['Int']/cfbQb['Att']) #Calculates the inverse of interceptions per attempt
 
@@ -63,7 +65,7 @@ stdevPRD = np.std(PRD) #Sample-std deviation of College Passer Rating for Drafte
 
 normColl=norm.pdf(PR,meanPr,stdevPR) #Normal plot of college passer rating for all college QBs
 
-#normDraft=plt.plot(norm.pdf(PRD, avgPrD, stdevPRD)) #Normal plot of college Passer Rating for drafted QBs
+normDraft=plt.plot(norm.pdf(PRD, avgPrD, stdevPRD)) #Normal plot of college Passer Rating for drafted QBs
 
 fit = norm.pdf(PR, meanPr, stdevPR)  #this is a fitting indeed
 
@@ -203,26 +205,26 @@ cTDpergame
 dTDpergame = cfbDQb['TD']/cfbDQb['G']
 
 #Plots
-'''
+
 hist_cYds=ax.hist(cTDpergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Total College TD/G') #Histogram
 
-sns.kdeplot(cTDpergame)
+#sns.kdeplot(cTDpergame)
 
 hist_dYds=ax.hist(dTDpergame, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College TD/G') #Histogram
 
-sns.kdeplot(dTDpergame)
+#sns.kdeplot(dTDpergame)
 
 plt.legend()
-'''
-###############################################################################################################################
+
+##############################################################################################################################
 
 #Total Yard per Game Comparison
 
 #College Total
-cTtlYdspergame
+#cTtlYdspergame
 
 #College Drafted
-dTtlYdspergame = (cfbDQb['Yds']+cfbDQb['RYds'])/cfbDQb['G']
+#dTtlYdspergame = (cfbDQb['Yds']+cfbDQb['RYds'])/cfbDQb['G']
 
 #Plots
 '''
@@ -238,7 +240,7 @@ plt.legend()
 '''
 
 ###############################################################################################################
-
+'''
 #Touchdown times Yds/ Attempts Comparision
 
 #College Total
@@ -248,13 +250,20 @@ cTDYPA = (cfbQb['TD']*cfbQb['Yds'])/cfbQb['Att']
 dTDYPA = (cfbDQb['TD']*cfbDQb['Yds'])/cfbDQb['Att']
 
 #Plots
-hist_cTDYPA=ax.hist(cTDYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Total TD*Yds/Att') #Histogram
+hist_cTDYPA=ax.hist(cTDYPA,density=True, histtype='stepfilled',alpha=0.2, label = 'Total TD*Yds/Att') #Histogram
 
-sns.kdeplot(cTDYPA)
+#plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
+#sns.kdeplot(cTDYPA)
+
+plt.xlabel('Touchdown times Yards divided by Attempts')
+
+plt.ylabel('Probability Density')
 
 hist_dTDYPA=ax.hist(dTDYPA, density=True, histtype='stepfilled', alpha=0.2, label = 'Drafted College TD*Yds/Att') #Histogram
 
-sns.kdeplot(dTDYPA)
+#sns.kdeplot(dTDYPA)
 
 plt.legend()
+
+'''
 
